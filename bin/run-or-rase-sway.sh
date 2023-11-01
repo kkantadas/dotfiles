@@ -2,7 +2,6 @@
 # https://gitlab.com/wef/dotfiles/-/blob/master/bin/sway-run-or-raise
 
 TIME_STAMP="20211102.175352"
-
 # Copyright (C) 2020-2021 Bob Hepple <bob dot hepple at gmail dot com>
 
 # This program is free software: you can redistribute it and/or modify
