@@ -30,6 +30,8 @@ else
 fi
 
 source /usr/share/fzf/completion.bash && source /usr/share/fzf/key-bindings.bash
+#check the exact filenme and location for gentoo linux
+
 #PS1=' [\u@\h \W]\$ '
 #PS1='(Goura \W)\$ '
 #PS1='(\W)\$ '
@@ -362,5 +364,5 @@ export BEMENU_OPTS="-l 10\
  --ab  #313436 "
 
 
-source /home/kk/.config/broot/launcher/bash/br
+#source /home/kk/.config/broot/launcher/bash/br
 

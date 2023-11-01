@@ -33,4 +33,3 @@ else
 fi
 
 
-source /home/kk/.config/broot/launcher/bash/br
