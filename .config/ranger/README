@@ -1,0 +1,10 @@
+--- add icons to Ranger ---
+sudo pacman -S ttf-nerd-fonts-symbols
+
+sudo ln -s /etc/fonts/conf.avail/10-nerd-font-symbols.conf /etc/fonts/conf.d/
+
+git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
+
+echo "default_linemode devicons" >> ~/.config/ranger/rc.conf
+
+

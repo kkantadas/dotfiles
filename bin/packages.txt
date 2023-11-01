@@ -1,0 +1,27 @@
+    bash-completion
+    neovim
+    wl-clipboard 
+    git
+    qutebrowser noto-fonts ttf-bitstream-vera ttf-croscore ttf-dejavu ttf-droid 
+    ttf-ibm-plex ttf-liberation
+   cantarell-fonts 
+   hyprland foot fzf 
+   foot-terminfo eza otf-codenewroman-nerd 
+   bemenu-wayland 
+   swaybg 
+   htop mpv
+   pulseaudio-bluetooth pulseaudio mako gammastep grim pavucontrol
+   imv
+   lf ranger
+   zathura
+   libcaca
+   starship broot 
+   adwaita-icon-theme 
+   arc-gtk-theme 
+   lxappearance
+   qutebrowser 
+   qt6-wayland 
+   qt5-base 
+   qt5-wayland 
+   gtk3
+   gBar

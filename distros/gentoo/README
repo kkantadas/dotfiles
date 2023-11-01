@@ -1,0 +1,15 @@
+    sudo emerge seatd
+    sudo rc-update add seatd default 
+    sudo rc-service seatd start
+
+  #if still ERROR try this..
+    
+    LIBSEAT_BACKEND=logind
+    export LIBSEAT_BACKEND=logind
+    gpasswd -a kk seat
+    sudo gpasswd -a kk seat
+
+
+    ..flatpack install .. 
+    ..flatpack run     .. 
+
