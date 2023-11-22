@@ -1,4 +1,8 @@
-#########   at .... /etc/portage/repos.conf/gentoo.conf
+######### README #####
+#########   at this to .... /etc/portage/repos.conf/gentoo.conf
+#########   delete.. rm /var/db/repos/gentoo/  ## first when changing to git
+######### emerge --sync 
+
 [DEFAULT]
 main-repo = gentoo
 
