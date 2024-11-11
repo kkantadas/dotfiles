@@ -1,0 +1,15 @@
+      Github docs:
+
+      Generating a new SSH key and adding it to the ssh-agent
+      ssh-keygen -t ed25519 -C "66082247+kkantadas@users.noreply.github.com"
+
+      add global the place holder email (in Github under emails) 
+      git config --global user.email 66082247+kkantadas@users.noreply.github.com
+
+      cat .ssh/id_ed25219.pub
+      cp this inside
+      past in to github ssh-key sections
+
+      ssh-add 
+      ssh-pas > Myp3288
+      fine........
