@@ -6,7 +6,7 @@ alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
 export XDG_RUNTIME_DIR=/run/user/$UID
-eval "$(starship init bash)"
+#eval "$(starship init bash)"
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
 case $- in
@@ -17,9 +17,11 @@ esac
 [[ $- != *i* ]] && return
 
 if [ -n "$SSH_CONNECTION" ]; then
-    export PS1="\u@\h: \w \$ "
+    #export PS1="\u@\h: \w \$ "
+    export PS1="[\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "
 else
-  export PS1="\w $ "
+    export PS1="[\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "
+  #export PS1="\w >> "
    #export PROMPT_COMMAND="echo;$PROMPT_COMMAND"
    #export PS1="[\e[1;34m\]\w\[\e[0m\]] "
    #export PS1="┌─[\e[1;34m\]\w\[\e[0m\]]\n└─╼ "
@@ -30,14 +32,11 @@ else
 fi
 
 source /usr/share/fzf/completion.bash && source /usr/share/fzf/key-bindings.bash
-#check the exact filenme and location for gentoo linux
-
 #PS1=' [\u@\h \W]\$ '
 #PS1='(Goura \W)\$ '
 #PS1='(\W)\$ '
 
 #for (( i=1; i<=$LINES; i++ )); do echo; done; clear;
-
 
 # Simple prompt
 #if [ -n "$SSH_CONNECTION" ]; then
@@ -46,8 +45,11 @@ source /usr/share/fzf/completion.bash && source /usr/share/fzf/key-bindings.bash
 #        export PS1="\w \$ "
 #fi
 #
+
+
 export PS2="> "
-export PATH=~/bin:$PATH
+export PATH=~/bin:$PATH 
+export PATH=~/.cargo/bin:$PATH # cargo install --git https://github.com/Morganamilo/paru.git
 export TERM=xterm-256color
 export LESSOPEN='|/usr/bin/lesspipe.sh %s'
 export LESS='-R'
@@ -143,6 +145,7 @@ fi
     alias vim="nvim"
     alias Emacs="emacsclient -cn -a="" $*"
     alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -"
+    alias ma="macchina -t ytt"
     alias PacRemove="sudo pacman -Sc"
     alias fbreader="FBReader"
     alias Snap-make="snapper -c root create -c timeline --description "
@@ -161,6 +164,9 @@ fi
     alias phone-mount="mkdir phone/ & simple-mtpfs --device 1 phone/"
     alias phone-umount="fusermount -u phone && rmdir phone"
     alias image="sxiv"
+    alias gd="cd $HOME/.config/dwl/"
+    alias mci="rm -rf config.h && sudo make clean install"
+    alias pat='patch -p1 <'
 
 
 
@@ -204,7 +210,6 @@ if ! shopt -oq posix; then
 fi
 
 
-
 # fzf
 export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden'
 export FZF_DEFAULT_OPTS='--no-height --color=bg+:#343d46,gutter:-1,pointer:#ff3c3c,info:#0dbc79,hl:#0dbc79,hl+:#23d18b'
@@ -220,7 +225,8 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
 docview () {
     if [[ -f $1 ]] ; then
         case $1 in
-            *.pdf)       mupdf     "$1" ;;
+            #*.pdf)       mupdf     "$1" ;;
+            *.pdf)       zathura    "$1" ;;
             *.ps)        oowriter "$1" ;;
             *.odt)       oowriter "$1" ;;
             *.txt)       urxvt -e vim  "$1" ;;
@@ -330,6 +336,18 @@ supertouch() {
 
 Find() { /usr/bin/find / -name "*$1*" 2>/dev/null; }
 
+# aur helper but more basic
+aurinstall() {
+	local AURL="https://aur.archlinux.org/cgit/aur.git/snapshot/${1}.tar.gz"
+	local WDIR="$(mktemp -d)"
+	(cd "${WDIR}" && curl -Ofs "${AURL}" && tar -xzf "${1}.tar.gz" || {
+		echo 'Package not found' 1>&2
+		false
+	}) && (cd "${WDIR}/${1}" && makepkg -sic)
+	rm -rf "${WDIR}"
+}
+
+
 #https://linuxopsys.com/topics/colors-for-ls-mean-change-colors-for-ls-in-bash
 LS_COLORS=$LS_COLORS:"*.pdf=0;33":"*.txt=01;37":"*.mobi=0;35"
 # 30	Black   || 00	Default color
@@ -364,5 +382,51 @@ export BEMENU_OPTS="-l 10\
  --ab  #313436 "
 
 
-#source /home/kk/.config/broot/launcher/bash/br
+function parse_git_branch() {
+	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+	if [ ! "${BRANCH}" == "" ]
+	then
+		STAT=`parse_git_dirty`
+		echo "[${BRANCH}${STAT}]"
+	else
+		echo ""
+	fi
+}
+
+# get current status of git repo
+function parse_git_dirty {
+export PS1="[\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "	status=`git status 2>&1 | tee`
+	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
+	untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
+	ahead=`echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
+	newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
+	renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
+	deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
+	bits=''
+	if [ "${renamed}" == "0" ]; then
+		bits=">${bits}"
+	fi
+	if [ "${ahead}" == "0" ]; then
+		bits="*${bits}"
+	fi
+	if [ "${newfile}" == "0" ]; then
+		bits="+${bits}"
+	fi
+	if [ "${untracked}" == "0" ]; then
+		bits="?${bits}"
+	fi
+	if [ "${deleted}" == "0" ]; then
+		bits="x${bits}"
+	fi
+	if [ "${dirty}" == "0" ]; then
+		bits="!${bits}"
+	fi
+	if [ ! "${bits}" == "" ]; then
+		echo " ${bits}"
+	else
+		echo ""
+	fi
+}
+
+source /home/kk/.config/broot/launcher/bash/br
 

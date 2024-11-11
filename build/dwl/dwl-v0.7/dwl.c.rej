@@ -1,0 +1,25 @@
+--- dwl.c
++++ dwl.c
+@@ -2703,7 +2715,7 @@ tagmon(const Arg *arg)
+ void
+ tile(Monitor *m)
+ {
+-	unsigned int mw, my, ty;
++	unsigned int mw, my, ty, draw_borders = 1;
+ 	int i, n = 0;
+ 	Client *c;
+ 
+@@ -2726,11 +2741,11 @@ tile(Monitor *m)
+ 			continue;
+ 		if (i < m->nmaster) {
+ 			resize(c, (struct wlr_box){.x = m->w.x, .y = m->w.y + my, .width = mw,
+-				.height = (m->w.height - my) / (MIN(n, m->nmaster) - i)}, 0);
++				.height = (m->w.height - my) / (MIN(n, m->nmaster) - i)}, 0, draw_borders);
+ 			my += c->geom.height;
+ 		} else {
+ 			resize(c, (struct wlr_box){.x = m->w.x + mw, .y = m->w.y + ty,
+-				.width = m->w.width - mw, .height = (m->w.height - ty) / (n - i)}, 0);
++				.width = m->w.width - mw, .height = (m->w.height - ty) / (n - i)}, 0, draw_borders);
+ 			ty += c->geom.height;
+ 		}
+ 		i++;

@@ -1,0 +1,14 @@
+ sudo pacman -S base-devel git libx11 libxft xorg-server xorg-xinit terminus-font
+  
+  git clone git://git.suckless.org/st ~/.local/src/st
+$ git clone git://git.suckless.org/dmenu ~/.local/src/dmenu
+$ git clone git://git.suckless.org/dwm ~/.local/src/dwm
+
+# XINERAMALIBS  = -lXinerama
+# XINERAMAFLAGS = -DXINERAMA
+
+---------------------------------------------------------
+picom
+https://github.com/yshui/picom
+
+
