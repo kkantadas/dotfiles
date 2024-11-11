@@ -1,5 +1,10 @@
-WAYLAND dotfiles.
 
-This is mainly for WAYLAND installation.
-The X dotfiles are in the distros folder.
+Dotfiles from X11 and Wayland 
+
+ArchInstall Guid 
+ArchInstall Post install
+
+Suckless programs like dwm and st in the builde folder
+
+
 
