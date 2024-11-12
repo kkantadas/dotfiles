@@ -1,0 +1,40 @@
+Installation Instructions¶
+Note: You will require the package, "efibootmgr".
+
+Find the desired block device name that will be booting from.
+$ lsblk
+
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+sda      8:0    0 232.9G  0 disk 
+├─sda1   8:1    0   499M  0 part /boot
+└─sda2   8:2    0 232.4G  0 part /
+
+Get the UUID of the root partition from "/mnt/etc/fstab", in this case it is "087dbc54-86c8-4523-a952-5191181b284b"
+
+$ cat /mnt/etc/fstab
+UUID=087dbc54-86c8-4523-a952-5191181b284b  /                btrfs  rw,relatime,compress=zlib,ssd,space_cache,subvolid=257,subvol=/ROOT,subvol=ROOT  0 0
+
+# /dev/sda1
+UUID=283A-FC18                             /boot            vfat  rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro  0 0
+
+# /dev/sdb1 LABEL=data
+UUID=57c7448d-e72b-4318-8de6-7478f2f79a52  /mnt/data-drive  btrfs  rw,relatime,compress=zlib,subvol=data  0 0
+Add a boot entry using "efibootmgr". Choose one of the applicable options below.
+
+BTRFS:
+$ efibootmgr -d /dev/sda -p 1 -c -L "Arch Linux" -l /vmlinuz-linux -u "root=UUID=087dbc54-86c8-4523-a952-5191181b284b rootflags=compress=zlib,ssd,space_cache,subvol=ROOT rw initrd=/initramfs-linux.img"
+
+Ext4:
+$ efibootmgr -d /dev/sda -p 1 -c -L "Arch Linux" -l /vmlinuz-linux -u "root=UUID=087dbc54-86c8-4523-a952-5191181b284b rootflags=rw initrd=/initramfs-linux.img"
+
+
+ sudo efibootmgr --disk /dev/sda --part 1 --create --label "Linux Arch" --loader /vmlinuz-linux --unicode 'root=PARTUUID=49c16c84-6cc3-4146-aba9-22d98c4f3e69 rw initrd=\initramfs-linux.img initrd=\intel-ucode.img i915.fastboot=1 nowatchdog systemd.show_status=false rd.systemd.show_status=false quiet loglevel=1 vga=current rd.udev.log_priority=1 video=SVIDEO-1:d'
+
+-d  Device name.
+-p  Device partition number.
+-L  Boot manager display label.
+-l  Specifiy the loader.
+-u  Extract command line options.
+Verify the new boot entry.
+
+$ efibootmgr -v
