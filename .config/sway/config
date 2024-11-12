@@ -183,11 +183,27 @@ mode "resize" {
 #
 # Status Bar:
 #
-# Read `man 5 sway-bar` for more information
+## Read `man 5 sway-bar` for more information
 bar {
-    position bottom
-    swaybar_command waybar
+    #position bottom
+    position  top
+    status_command /usr/bin/i3status-rs $HOME/.config/i3status-rust/config.toml
+    mode hide 
+    modifier mod1
+    height 26  
+    pango_markup enabled
+font pango:jetbrains mono 11.0
+
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #323232 #323232 #5c5c5c
+    }
 }
+###bar {
+###    position bottom
+###    swaybar_command waybar
+###}
    #hide_edge_borders smart
    gaps inner 4
    smart_gaps on
