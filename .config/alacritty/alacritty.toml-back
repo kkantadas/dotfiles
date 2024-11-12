@@ -1,0 +1,45 @@
+[font]
+size = 13
+
+[font.bold]
+family = "SauceCodePro Nerd Font"
+style = "Bold"
+
+[font.bold_italic]
+family = "SauceCodePro Nerd Font"
+style = "Bold Italic"
+
+[font.italic]
+family = "SauceCodePro Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "SauceCodePro Nerd Font"
+style = "Regular"
+
+
+#[font.primary]
+#background = "#1D1E2BD"
+#background = "#241F31"
+#foreground = "[98]White"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[window]
+dynamic_title = true
+#gtk_theme_variant = "None"
+opacity = 0.75
+title = "Terminal"
+#dimensions:
+
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
+
+[window.dimensions]
+columns = 85
+lines = 25
+

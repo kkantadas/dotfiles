@@ -10,6 +10,9 @@ local keymap = vim.api.nvim_set_keymap
  vim.g.mapleader = " "
  vim.g.maplocalleader = " "
 
+
+
+
 -- Modes
 --   normal_mode = "n",
 --   insert_mode = "i",

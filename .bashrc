@@ -21,10 +21,20 @@ if [ -n "$SSH_CONNECTION" ]; then
     export PS1="[\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "
 else
     export PS1="[\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "
+  #export PS1="\w >> "
+   #export PROMPT_COMMAND="echo;$PROMPT_COMMAND"
+   #export PS1="[\e[1;34m\]\w\[\e[0m\]] "
+   #export PS1="┌─[\e[1;34m\]\w\[\e[0m\]]\n└─╼ "
+   #export PS1="┌─[\[\e[01;32m\]\u\[\e[00m\]@\[\e[01;32m\]\h\[\e[00m\]:\[\e[1;34m\]\w\[\e[0m\]]\n└─╼ "
+   #export PS1="\e[01;32m\]┌─[\[\e[01;32m\]\u\[\e[00m\]@\[\e[01;32m\]\h\[\e[00m\]:\[\e[1;34m\]\w\[\e[0m\]\e[01;
+   #32m\]]\n\e[01;32m\]└─╼\e[00m\] "
    #export PS1="\w \$ "
 fi
 
 source /usr/share/fzf/completion.bash && source /usr/share/fzf/key-bindings.bash
+#PS1=' [\u@\h \W]\$ '
+#PS1='(Goura \W)\$ '
+#PS1='(\W)\$ '
 
 #for (( i=1; i<=$LINES; i++ )); do echo; done; clear;
 
@@ -35,6 +45,7 @@ source /usr/share/fzf/completion.bash && source /usr/share/fzf/key-bindings.bash
 #        export PS1="\w \$ "
 #fi
 #
+
 
 export PS2="> "
 export PATH=~/bin:$PATH 

@@ -50,10 +50,21 @@ use "folke/tokyonight.nvim"  -- colortheme
 use "ellisonleao/gruvbox.nvim"  
 use "folke/zen-mode.nvim"
 use "vimwiki/vimwiki" 
+use "bolt12/AbbrevMan.nvim"
+use 'Mofiqul/dracula.nvim'
 use {
   'nvim-telescope/telescope.nvim',
   requires = { {'nvim-lua/plenary.nvim'} }
 }
+
+use({
+  "neanias/everforest-nvim",
+  -- Optional; default configuration will be used if setup isn't called.
+  config = function()
+    require("everforest").setup()
+  end,
+})
+
   -- Treesitter
   use {
     "nvim-treesitter/nvim-treesitter",

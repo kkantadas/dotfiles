@@ -40,3 +40,13 @@ vim.cmd("nmap <silent> <Up> gk")
  vim.cmd("hi Folded ctermbg=none guibg=none")
 
  vim.cmd("set clipboard=")
+ vim.cmd("command! WipeReg for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor")
+
+-- transparent background
+vim.cmd [[
+  highlight Normal guibg=none
+  highlight NonText guibg=none
+  highlight Normal ctermbg=none
+  highlight NonText ctermbg=none
+]]
+
