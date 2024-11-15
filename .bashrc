@@ -140,7 +140,6 @@ fi
     alias pt='pstree -p'
     alias du-ds='du -sh */'
     alias tmux-attach="tmux attach"
-    alias phone="jmtpfs --help ; echo '.....jmtpfs ~/Folder....'"
     alias vi="nvim"
     alias vim="nvim"
     alias Emacs="emacsclient -cn -a="" $*"
@@ -154,29 +153,25 @@ fi
     alias cp="cp -r"
     alias dmenu="dmenu-wl"
     alias dmenu_run="dmenu-wl_run"
-
     alias Tree="tree -L 1"
     alias Fzf="fzf --preview 'bat --style changes --color=always {}'"
     alias sxiv="sxiv.sh"
     alias open="xdg-open"
-    alias phone="simple-mtpfs --help"
     alias phone-list="simple-mtpfs -l"
     alias phone-mount="mkdir phone/ & simple-mtpfs --device 1 phone/"
     alias phone-umount="fusermount -u phone && rmdir phone"
+    alias phone="jmtpfs --help ; echo '.....jmtpfs ~/Folder....'"
     alias image="sxiv"
     alias gd="cd $HOME/.config/dwl/"
     alias mci="rm -rf config.h && sudo make clean install"
     alias pat='patch -p1 <'
-
-
-
-    #remove all other packages from cache
 
 # some more ls aliases
     #alias ll='ls -lh'
     #alias lla='ls -lah'
     #alias la='ls -A'
     #alias l='ls -CF'
+
 # some more ls aliases
     alias l='eza -g --group-directories-first'
     alias la='eza -G -a --icons --group-directories-first'
