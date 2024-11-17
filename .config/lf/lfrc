@@ -17,6 +17,7 @@
 
 # Basic vars
 set shellopts '-eu'
+set info size
 set ifs "\n"
 set scrolloff 10
 set icons
@@ -27,7 +28,7 @@ set cleaner '~/.config/lf/cleaner'
 set previewer '~/.config/lf/scope.sh'
 set autoquit true
 set cursorpreviewfmt ""
-set drawbox
+#set drawbox
 
 set previewer ctpv
 set cleaner ctpvclear
