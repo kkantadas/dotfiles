@@ -1,12 +1,20 @@
 
+symnlink with ranger yy pl 
+
+make save for accitental deletion
+chattr +i filename
+
+And to disable it:
+chattr -i filename
+rm filename
+
 Dotfiles from X11 and Wayland 
 
 ArchInstall Guid 
 ArchInstall Post install
 
 Gentoo and nixos Guide
-Kernel config
- 
+Kernel config 
 
 
 

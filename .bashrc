@@ -180,7 +180,10 @@ fi
     alias lla='eza -l -a -g --icons --group-directories-first'
     alias tree='eza --tree --icons'  
     alias snapgui='snapper-gui'
-
+    alias chmod='chmod --preserve-root'
+    alias chown='chown --preserve-root'
+    alias chgrp='chgrp --preserve-root'
+    
 # Alias definitions.
 
 #alias | sed -E "s/^alias ([^=]+)='(.*)'$/alias \1 \2 \$*/g; s/'\\\''/'/g;" >~/.emacs.d/eshell/alias
