@@ -54,6 +54,9 @@ cmd open ${{
 
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 
+# open-with
+cmd open-with %"$@" "$fx"
+map ` push :open-with<space>
 
 cmd delete ${{
 	clear; tput cup $(($(tput lines)/3)); tput bold
