@@ -1,11 +1,14 @@
 
 symnlink with ranger yy pl 
+or 
+#ln -s $HOME/file/path . or to directory 
+ -this gives the absolute path
 
-make save for accitental deletion
-chattr +i filename
+prevent for accitental deletion
+# chattr +i filename
 
 And to disable it:
-chattr -i filename
+# chattr -i filename
 rm filename
 
 Dotfiles from X11 and Wayland 
