@@ -1,36 +1,36 @@
 
-Dotfiles from X11 and Wayland 
-...
+# Dotfiles from X11 and Wayland 
 
-# ln -s $HOME/file/path . or to directory 
+## ln -s $HOME/file/path . or to directory 
  -this gives the absolute path
-# ln -s --relative # gives a nice symlink path
+ ln -s --relative # gives a nice symlink path
 
 or 
-symnlink with ranger yy pl for all the dotfiles 
+## symnlink with ranger yy pl for all the dotfiles 
 
 prevent for accitental deletion
-# chattr +i filename
+## chattr +i filename
 
 And to disable it:
-# chattr -i filename
+## chattr -i filename
 rm filename
 
 
-bash_profile X11
-...
+### bash_profile X11
 
-# ~/.bash_profile
+```
+ ~/.bash_profile
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
 [[ $(fgconsole 2>/dev/null) == 1 ]] && exec startx -- vt1 &> /dev/null
 #[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
 
+```
 
-bash_profile wayland 
-...
+## bash_profile wayland 
 
-# .bash_profile
+```
+ ~/.bash_profile
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 if [ "$(tty)" = "/dev/tty1" ] ; then
@@ -70,10 +70,11 @@ if [ "$(tty)" = "/dev/tty1" ] ; then
    logout
    fi
  fi
+```
 
-xinitrc config
-...
+## xinitrc config
 
+```
 #!/bin/sh
 
 xwallpaper --center /home/kk/bin/wallpapers/cabin-rain.jpg
@@ -110,3 +111,4 @@ sudo rfkill unblock bluetooth
 exec i3wm
 exec ratpoison
 #exec dbus-launch --exit-with-session emacs -mm --debug-init
+```
