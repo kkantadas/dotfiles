@@ -1,20 +1,33 @@
-
 # Dotfiles from X11 and Wayland 
 
-## ln -s $HOME/file/path . or to directory 
- -this gives the absolute path
- ln -s --relative # gives a nice symlink path
+ ### Symlink the dotfiles
 
-or 
-## symnlink with ranger yy pl for all the dotfiles 
+ - relative path
 
-prevent for accitental deletion
-## chattr +i filename
+ ```
+ $ ln -s .dotfiles/"My-configfile" .  
 
-And to disable it:
-## chattr -i filename
-rm filename
+ ```
 
+### or 
+
+### symnlink with ranger 
+
+```
+with yy pl for all the dotfiles 
+
+``` 
+
+### Prevent for accitental deletion
+
+```
+$ chattr +i filename
+```
+- And to disable it:
+```
+$ chattr -i filename
+$ rm filename
+```
 
 ### bash_profile X11
 
@@ -27,7 +40,7 @@ rm filename
 
 ```
 
-## bash_profile wayland 
+### bash_profile wayland 
 
 ```
  ~/.bash_profile
@@ -72,7 +85,7 @@ if [ "$(tty)" = "/dev/tty1" ] ; then
  fi
 ```
 
-## xinitrc config
+### xinitrc config
 
 ```
 #!/bin/sh
