@@ -1,15 +1,25 @@
 # Dotfiles from X11 and Wayland 
 
-### ln -s $HOME/file/path . or to directory 
- - this gives the absolute path
-```
- ln -s --relative # gives a nice symlink path
-```
-## or 
+ ### Symlink the dotfiles
 
-### symnlink with ranger yy pl for all the dotfiles 
+ - relative path
 
-### prevent for accitental deletion
+ ```
+ $ ln -s .dotfiles/"My-configfile" .  
+
+ ```
+
+### or 
+
+### symnlink with ranger 
+
+```
+with yy pl for all the dotfiles 
+
+``` 
+
+### Prevent for accitental deletion
+
 ```
 $ chattr +i filename
 ```
