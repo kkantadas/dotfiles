@@ -1,4 +1,3 @@
-# .bashrc
 
 [[ $- != *i* ]] && return
 
@@ -6,8 +5,6 @@ alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
 export XDG_RUNTIME_DIR=/run/user/$UID
-#eval "$(starship init bash)"
-[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
 case $- in
     *i*) ;;
@@ -21,30 +18,9 @@ if [ -n "$SSH_CONNECTION" ]; then
     export PS1="[\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "
 else
     export PS1="[\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "
-  #export PS1="\w >> "
-   #export PROMPT_COMMAND="echo;$PROMPT_COMMAND"
-   #export PS1="[\e[1;34m\]\w\[\e[0m\]] "
-   #export PS1="┌─[\e[1;34m\]\w\[\e[0m\]]\n└─╼ "
-   #export PS1="┌─[\[\e[01;32m\]\u\[\e[00m\]@\[\e[01;32m\]\h\[\e[00m\]:\[\e[1;34m\]\w\[\e[0m\]]\n└─╼ "
-   #export PS1="\e[01;32m\]┌─[\[\e[01;32m\]\u\[\e[00m\]@\[\e[01;32m\]\h\[\e[00m\]:\[\e[1;34m\]\w\[\e[0m\]\e[01;
-   #32m\]]\n\e[01;32m\]└─╼\e[00m\] "
-   #export PS1="\w \$ "
 fi
 
-source /usr/share/fzf/completion.bash && source /usr/share/fzf/key-bindings.bash
-#PS1=' [\u@\h \W]\$ '
-#PS1='(Goura \W)\$ '
-#PS1='(\W)\$ '
-
-#for (( i=1; i<=$LINES; i++ )); do echo; done; clear;
-
-# Simple prompt
-#if [ -n "$SSH_CONNECTION" ]; then
-#        export PS1="\u@\h: \w \$ "
-#else
-#        export PS1="\w \$ "
-#fi
-#
+eval "$(fzf --bash)"
 
 
 export PS2="> "
@@ -55,29 +31,15 @@ export LESSOPEN='|/usr/bin/lesspipe.sh %s'
 export LESS='-R'
 export EDITOR=nvim
 
-#export PAGER=/usr/bin/vimpager
-#alias less=$PAGER
-#
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
 HISTCONTROL=ignoreboth
-
-# append to the history file, don't overwrite it
 shopt -s histappend
 
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=20000
 HISTFILESIZE=40000
 
-# check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# If set, the pattern
-#  used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -87,11 +49,6 @@ case "$TERM" in
     xterm-color) color_prompt=yes;;
 esac
 echo -e -n "\x1b[\x33 q" # changes to blinking underline
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -104,20 +61,14 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-##[ -n "$XTERM_VERSION" ] && transset-df .70 -a >/dev/null
-
-# enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-    #https://github.com/garabik/grc
-    #Color in the terminal -- cp -r  /etc/profile.d/grc.sh /etc/ 
     GRC_ALIASES=true
     [[ -s "/etc/profile.d/grc.sh" ]] && source /etc/grc.sh
     alias dir='dir --color=auto'
     alias feh='feh --image-bg black --scale-down'
-    alias urxvt2='urxvt & sleep .3s && transset-df -a 0.93'
     alias ls='ls --color=auto --group-directories-first'
     alias Mount='sudo mount -o gid=users,fmask=113,dmask=002'
     alias MountMac='sudo mount -t hfsplus -o force,rw'
@@ -165,7 +116,6 @@ fi
     alias gd="cd $HOME/.config/dwl/"
     alias mci="rm -rf config.h && sudo make clean install"
     alias pat='patch -p1 <'
-
 # some more ls aliases
     #alias ll='ls -lh'
     #alias lla='ls -lah'
@@ -186,7 +136,6 @@ fi
     
 # Alias definitions.
 
-#alias | sed -E "s/^alias ([^=]+)='(.*)'$/alias \1 \2 \$*/g; s/'\\\''/'/g;" >~/.emacs.d/eshell/alias
 
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -427,4 +376,4 @@ export PS1="[\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "	statu
 }
 
 source /home/kk/.config/broot/launcher/bash/br
-
+eval "$(zoxide init --cmd cd bash)"
