@@ -116,6 +116,15 @@ fi
     alias gd="cd $HOME/.config/dwl/"
     alias mci="rm -rf config.h && sudo make clean install"
     alias pat='patch -p1 <'
+    alias rm='/usr/bin/trash -v'
+    alias cp='cp -i'
+    alias mv='mv -i'
+    alias mkdir='mkdir -p'
+    alias ps='ps auxf'
+    alias ping='ping -c 10'
+    alias less='less -R'
+    alias p="ps aux | grep "
+
 # some more ls aliases
     #alias ll='ls -lh'
     #alias lla='ls -lah'

@@ -90,6 +90,27 @@ cmd bulkrename ${{
     lf -remote "send $id unselect"
 }}
 
+# y (select for copy) and P to paste soft-link
+# d (select for cut) and P to paste hard-link
+cmd link %{{
+    set -- $(cat ~/.local/share/lf/files)
+    mode="$1"
+    shift
+    if [ "$#" -lt 1 ]; then
+        lf -remote "send $id echo no files to link"
+        exit 0
+    fi
+    case "$mode" in
+        # symbolically copy mode is indicating a soft link
+        copy) ln -sr -t . -- "$@";;
+        # while a move mode is indicating a hard link
+        move) ln -t . -- "$@";;
+    esac
+    rm ~/.local/share/lf/files
+    lf -remote "send clear"
+}}
+map P :link
+
 cmd cut-add %{{
     files=$(lf -remote load | tail -n +2)
     newline=$'\n'
@@ -164,7 +185,7 @@ map o &mimeopen "$f"
 map O $mimeopen --ask "$f"
 
 map A :rename; cmd-end # at the very end
-map c push A<c-u> # new rename
+#map c push A<c-u> # new rename
 map I :rename; cmd-home # at the very beginning
 map a :rename; cmd-right # after extension
 map B bulkrename
