@@ -7,6 +7,7 @@ require("kk.telescope")
 require('kk.colortheme')  -- Colortheme
 -- vim.cmd('colorscheme duskfox') ---""---
 require('kk.treesitter')
+require'nvim-tree'.setup()
 
    -- add transparent background 
   --   require("transparent").setup({

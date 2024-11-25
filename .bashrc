@@ -31,11 +31,16 @@ export LESSOPEN='|/usr/bin/lesspipe.sh %s'
 export LESS='-R'
 export EDITOR=nvim
 
-HISTCONTROL=ignoreboth
-shopt -s histappend
 
 HISTSIZE=20000
 HISTFILESIZE=40000
+
+# Duplicate commands and start with space are not saved 
+HISTCONTROL=ignoreboth
+
+# Append history entries
+shopt -s histappend
+export PROMPT_COMMAND='history -a'
 
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
