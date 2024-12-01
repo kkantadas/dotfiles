@@ -10,10 +10,10 @@
 # Note: the "$mod" modifier is also known as Logo, GUI, Windows, Mod4, etc.
 
 mod="Mod4"
- 
+riverctl spawn "wbg ~/bin/wallpapers/cabin-rain.jpg" 
 # set a wallpaper with swaybg
 # rotate wallpaper with timing kill with > sudo kill -9 $(pidof bgchanger.sh)
-riverctl spawn "cd ~/bin && ./bgchanger.sh"
+#riverctl spawn "cd ~/bin && ./bgchanger.sh"
 
 #riverctl map normal $mod Z spawn "river-bar.sh"
 

@@ -28,7 +28,7 @@ Ext4:
 $ efibootmgr -d /dev/sda -p 1 -c -L "Arch Linux" -l /vmlinuz-linux -u "root=UUID=087dbc54-86c8-4523-a952-5191181b284b rootflags=rw initrd=/initramfs-linux.img"
 
 
- sudo efibootmgr --disk /dev/sda --part 1 --create --label "Linux Arch" --loader /vmlinuz-linux --unicode 'root=PARTUUID=49c16c84-6cc3-4146-aba9-22d98c4f3e69 rw initrd=\initramfs-linux.img initrd=\intel-ucode.img i915.fastboot=1 nowatchdog systemd.show_status=false rd.systemd.show_status=false quiet loglevel=1 vga=current rd.udev.log_priority=1 video=SVIDEO-1:d'
+ sudo efibootmgr --disk /dev/sda --part 1 --create --label "Linux Arch" --loader /vmlinuz-linux --unicode 'root=PARTUUID=49c16c84-6cc3-4146-aba9-22d98c4f3e69 rw initrd=\initramfs-linux.img initrd=\intel-ucode.img i915.fastboot=1 nowatchdog systemd.show_status=false rd.systemd.show_status=false quiet loglevel=1 console=tty12 vga=current rd.udev.log_priority=1 video=SVIDEO-1:d'
 
 -d  Device name.
 -p  Device partition number.
