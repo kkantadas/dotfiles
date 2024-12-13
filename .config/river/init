@@ -20,8 +20,8 @@ riverctl spawn "wbg ~/bin/wallpapers/cabin-rain.jpg"
 riverctl spawn "foot --server <&-"
 riverctl spawn "gammastep -l 32.4067:88.3686 -t 5700:3900"
 # $mod+Shift+Return to start an instance of foot (https://codeberg.org/dnkl/foot)
-riverctl map normal $mod+Shift Return spawn "footclient" 
-riverctl map normal $mod+Shift Return spawn "foot & sleep .05s && riverctl zoom && sleep .05s && riverctl focus-view next"
+#riverctl map normal $mod+Shift Return spawn "footclient" 
+riverctl map normal $mod+Shift Return spawn "footclient & sleep .05s && riverctl zoom && sleep .05s && riverctl focus-view next"
 
 riverctl map normal $mod O spawn "footclient && riverctl zoom" 
 riverctl map normal $mod+Shift P  spawn "footclient & sleep .05 && riverctl toggle-float"
@@ -192,7 +192,6 @@ riverctl map normal Mod4 Down spawn "cycle-focused-tags next 9"
 #riverctl spawn "waybar -c ~/.config/waybar/river/config-river -s ~/.config/waybar/river/river_style.css & sleep 7s && killall waybar"
 #riverctl spawn "waybar -c ~/.config/waybar/bar/config -s ~/.config/waybar/bar/style.css" 
 riverctl spawn "i3bar-river"
-riverctl map normal $mod Z spawn "killall -SIGUSR1 i3bar-river"
 
 #--or---
 #riverctl spawn i3bar-river

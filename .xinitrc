@@ -1,6 +1,7 @@
 #!/bin/sh
 
-xwallpaper --center /home/kk/bin/wallpapers/cabin-rain.jpg
+#xwallpaper --center /home/kk/bin/wallpapers/cabin-rain.jpg
+feh --bg-fill /home/kk/bin/wallpapers/cabin-rain.jpg
 slstatus &
 dwm-redshift.sh &
 xmodmap .Xmodmap &

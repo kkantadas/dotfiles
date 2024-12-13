@@ -156,6 +156,9 @@ See the above repository for updates as well as full license text. */
   }
 
 /*** Hide Tab Close buttons ***/
+/*** about:config ***/
+/*** browser.tabs.tabClipWidth  (for example, 1000000) ***/
+
 .tabbrowser-tab .tab-close-button {
   visibility: collapse !important;
 }
