@@ -32,6 +32,7 @@ export LESS='-R'
 export EDITOR=nvim
 
 
+
 HISTSIZE=20000
 HISTFILESIZE=40000
 
