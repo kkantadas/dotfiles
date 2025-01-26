@@ -390,5 +390,4 @@ export PS1="[\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "	statu
 	fi
 }
 
-source /home/kk/.config/broot/launcher/bash/br
 eval "$(zoxide init --cmd cd bash)"
