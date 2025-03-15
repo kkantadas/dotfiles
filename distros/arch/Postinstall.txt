@@ -1,4 +1,4 @@
-
+$ rate-mirrors --protocol https arch
 
 $ useradd -m -G audio,wheel,video,power,log,storage -s /bin/bash kanta
 $ passwd kanta

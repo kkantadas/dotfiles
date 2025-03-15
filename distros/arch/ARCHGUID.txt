@@ -4,6 +4,7 @@
 # timedatectl status
 # pacman -S reflector
 # reflector -c India -a 6 --sort rate --save /etc/pacman.d/mirrorlist
+# rate-mirrors --protocol https arch
 # pacman -Syy
 
 LEGECI-BOOT
