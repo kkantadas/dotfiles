@@ -164,6 +164,9 @@ cmd cut-remove %{{
 cmd trash ${{
         mv -- $fx ~/.Trash
 }}
+cmd empty ${{
+        rm -frv -- $fx ~/.Trash/{*,.*}
+}}
 
 cmd open-with-gui &$@ $fx ## opens with a gui application outside lf client
 cmd open-with-cli $$@ $fx ## opens with a cli application inside lf client
