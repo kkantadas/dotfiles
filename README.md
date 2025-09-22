@@ -1,5 +1,9 @@
 # Dotfiles from X11 and Wayland 
 
+ ### Firefox Tab Font size fix ....
+about:config
+layout.css.devPixelsPerPx  >> 1.15
+
  ### Symlink the dotfiles
 
  - relative path
