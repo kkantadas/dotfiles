@@ -1,0 +1,27 @@
+install dkms linux-headers 
+
+rmmod r8169 2>/dev/null
+rmmod r8168 2>/dev/null
+modprobe r8168
+ip link
+modprobe r8169
+ip link
+ping google.com
+modprobe r8125
+ping google.com
+mkinitcpio -P
+reboot
+ping google.com
+cat /etc/modprobe.d/blacklist.conf
+cat /etc/modprobe.d/blacklist.conf >> /etc/modprobe.d/blacklist-r8169.conf
+vim /etc/modprobe.d/blacklist-r8169.conf
+rm /etc/modprobe.d/blacklist.conf
+reboot
+ping google.com
+----------
+>> in balcklist-r8169.conf >>
+blacklist r8169
+install r8169 /bin/true
+
+-------------------
+yay -S r5125-**
