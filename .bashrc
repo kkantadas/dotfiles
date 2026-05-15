@@ -76,7 +76,8 @@ fi
     alias dir='dir --color=auto'
     alias feh='feh --image-bg black --scale-down'
     alias ls='ls --color=auto --group-directories-first'
-    alias Mount='sudo mount -o gid=users,fmask=113,dmask=002'
+    alias mmount='sudo mount -o gid=users,fmask=113,dmask=002'
+    alias Mount='sudo mount -t ntfs-3g'
     alias MountMac='sudo mount -t hfsplus -o force,rw'
     alias umount='sudo umount'
     alias grep='grep --color=auto'
@@ -130,6 +131,9 @@ fi
     alias ping='ping -c 10'
     alias less='less -R'
     alias p="ps aux | grep "
+
+alias cpuquiet="sudo cpupower frequency-set -g powersave"
+alias cpuboost="sudo cpupower frequency-set -g performance"
 
 # some more ls aliases
     #alias ll='ls -lh'
