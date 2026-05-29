@@ -1,0 +1,96 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 28,
+  "spacing": 8,
+
+  "modules-left": [
+    "niri/workspaces",
+    "niri/window"
+  ],
+
+  "modules-center": [
+    "clock"
+  ],
+
+  "modules-right": [
+    "cpu",
+    "memory",
+    "temperature",
+    "network",
+    "battery",
+    "tray"
+  ],
+
+  "niri/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "active": "",
+      "default": ""
+    }
+  },
+
+  "niri/window": {
+    "format": "{}",
+    "max-length": 50
+  },
+
+  "clock": {
+    "format": "  {:%H:%M     %a %d.%m.%Y}",
+    "tooltip-format": "<big>{:%A, %d %B %Y}</big>\n<tt>{calendar}</tt>"
+  },
+
+  "cpu": {
+    "format": "  {usage}%",
+    "tooltip": true,
+    "interval": 2
+  },
+
+  "memory": {
+    "format": "  {}%",
+    "tooltip": true,
+    "interval": 2
+  },
+
+  "temperature": {
+    "critical-threshold": 80,
+    "format": "  {temperatureC}°C",
+    "format-critical": "  {temperatureC}°C",
+    "interval": 2
+  },
+
+  "network": {
+    "format-wifi": "  {essid} {signalStrength}%",
+    "format-ethernet": "󰈀  {ipaddr}",
+    "format-disconnected": "󰖪  offline",
+    "tooltip-format": "{ifname}: {ipaddr}",
+    "interval": 5
+  },
+
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon}  {capacity}%",
+    "format-charging": "󰂄  {capacity}%",
+    "format-plugged": "  {capacity}%",
+    "format-icons": [
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
+    ]
+  },
+
+  "tray": {
+    "icon-size": 16,
+    "spacing": 8
+  }
+}

@@ -1,16 +1,33 @@
-drun-launch = true
-anchor = bottom
+# dmenu-like tofi config
+
+anchor = top
 width = 100%
-height = 30
+height = 28
 horizontal = true
-font-size = 14
-prompt-text = " @ "
+
 font = monospace
-outline-width = 0
+font-size = 12
+
+background-color = #000000
+text-color = #bbbbbb
+selection-color = #ffffff
+selection-background = #333333
+
 border-width = 0
-min-input-width = 120
+outline-width = 0
+padding-top = 4
+padding-bottom = 4
+padding-left = 8
+padding-right = 8
+
+prompt-text = "> "
+prompt-color = #ffffff
+
+input-color = #ffffff
+placeholder-color = #777777
+
 result-spacing = 15
-padding-top = 0
-padding-bottom = 0
-padding-left = 0
-padding-right = 0
+num-results = 20
+
+hide-cursor = true
+drun-launch = true

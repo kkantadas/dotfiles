@@ -1,0 +1,97 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 28,
+  "spacing": 8,
+
+  "modules-left": [
+    "niri/workspaces",
+    "niri/window"
+  ],
+
+  "modules-center": [
+    "clock"
+  ],
+
+  "modules-right": [
+    "custom/netstatus",
+    "cpu",
+    "memory",
+    "temperature",
+    "battery",
+    "tray"
+  ],
+
+  "niri/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "active": "",
+      "default": ""
+    }
+  },
+
+  "niri/window": {
+    "format": "{}",
+    "max-length": 50
+  },
+
+  "clock": {
+    "format": "{:%a %H:%M}",
+    "tooltip-format": "{:%A, %d.%m.%Y}"
+  },
+
+  "custom/netstatus": {
+    "exec": "netstatus.sh 2>/dev/null || echo down",
+    "format": "[ {} ]",
+    "interval": 5,
+    "tooltip": false
+  },
+
+  "cpu": {
+    "format": "[   {usage}% ",
+    "interval": 5,
+    "tooltip": false
+  },
+
+  "memory": {
+    "format": "  {}% ]",
+    "interval": 5,
+    "tooltip": false
+  },
+
+  "temperature": {
+    "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+    "critical-threshold": 80,
+    "format": "[   {temperatureC}°C ]",
+    "format-critical": "[   {temperatureC}°C ]",
+    "interval": 5,
+    "tooltip": false
+  },
+
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "[ {icon}  {capacity}% ]",
+    "format-charging": "[ 󰂄  {capacity}% ]",
+    "format-plugged": "[   {capacity}% ]",
+    "format-icons": [
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
+    ]
+  },
+
+  "tray": {
+    "icon-size": 16,
+    "spacing": 8
+  }
+}
