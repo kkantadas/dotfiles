@@ -192,6 +192,7 @@ if command -v nixos-rebuild >/dev/null 2>&1; then
 
 # Rebuild NixOS system and clean old generations
 rebuild() {
+ (
   cd /etc/nixos || return
 
   echo "Rebuilding system..."
@@ -202,14 +203,14 @@ rebuild() {
 
   echo "Running garbage collection..."
   sudo nix-store --gc >/dev/null 2>&1
+  )
 }
 
 # Only update the flake.lock file
 update() {
-  cd /etc/nixos || return
-
   echo "Updating flake..."
-  sudo nix flake update
+  (cd /etc/nixos || return
+  sudo nix flake update)
 }
     garbage() {
         sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +3
