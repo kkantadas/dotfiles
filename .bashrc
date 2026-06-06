@@ -190,26 +190,27 @@ if command -v nixos-rebuild >/dev/null 2>&1; then
   alias home='sudo nvim /etc/nixos/'
   alias gen='sudo nix-env --list-generations --profile /nix/var/nix/profiles/system'
 
-  rebuild() {
-    sudo nixos-rebuild switch --flake /etc/nixos#nixos-btw
-  }
-
-   update() {
+# Rebuild NixOS system and clean old generations
+rebuild() {
   cd /etc/nixos || return
-
-  echo "Updating flake..."
-  sudo nix flake update
 
   echo "Rebuilding system..."
   sudo nixos-rebuild switch --flake /etc/nixos#nixos-btw
 
   echo "Keeping last 6 system generations..."
-  sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations +6
+  sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations +6 >/dev/null 2>&1
 
   echo "Running garbage collection..."
-  sudo nix-store --gc
-} 
+  sudo nix-store --gc >/dev/null 2>&1
+}
 
+# Only update the flake.lock file
+update() {
+  cd /etc/nixos || return
+
+  echo "Updating flake..."
+  sudo nix flake update
+}
     garbage() {
         sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +3
         sudo nix-collect-garbage
