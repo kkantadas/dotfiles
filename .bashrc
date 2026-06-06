@@ -118,8 +118,6 @@ fi
     alias pt='pstree -p'
     alias du-ds='du -sh */'
     alias tmux-attach="tmux attach"
-    alias vi="nvim"
-    alias vim="nvim"
     alias Emacs="emacsclient -cn -a="" $*"
     alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -"
     alias ma="macchina -t ytt"
@@ -143,7 +141,6 @@ fi
     alias gd="cd $HOME/.config/dwl/"
     alias mci="rm -rf config.h && sudo make clean install"
     alias pat='patch -p1 <'
-    alias rm='/usr/bin/trash -v'
     alias cp='cp -i'
     alias mv='mv -i'
     alias mkdir='mkdir -p'
@@ -174,6 +171,18 @@ fi
       alias lla='ls -lah'
     fi
 
+     if command -v nvim >/dev/null 2>&1; then
+       alias vim="nvim"
+       alias vi="nvim"
+     else
+       alias vim="vim"
+     fi
+
+    if command -v trash >/dev/null 2>&1; then
+       alias rm='/usr/bin/trash -v'
+     else
+       alias rm="rm -rv"
+     fi
 
 # NixOS aliases
 if command -v nixos-rebuild >/dev/null 2>&1; then
