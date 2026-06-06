@@ -1,4 +1,8 @@
 
+ #bash configuration#############################
+ #install > fzf, fd, eza, lesspipe, bat, zoxide
+ #################################################
+
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
@@ -13,15 +17,31 @@ esac
 
 [[ $- != *i* ]] && return
 
+#if [ -n "$SSH_CONNECTION" ]; then
+#    #export PS1="\u@\h: \w \$ "
+#    export PS1="[\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "
+#else
+#    export PS1="[\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "
+#fi
+
+get_distro_icon() {
+    [ -f /etc/os-release ] || return
+
+    . /etc/os-release
+
+    case "$ID" in
+        arch)  echo "󰣇" ;;
+        nixos) echo "" ;;
+        guix)  echo "" ;;
+        *) echo "" ;;
+    esac
+}
+
 if [ -n "$SSH_CONNECTION" ]; then
-    #export PS1="\u@\h: \w \$ "
-    export PS1="[\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "
+    export PS1="[\[\e[33m\]\$(get_distro_icon)\[\e[m\] \[\e[36m\]\w\[\e[m\]\[\e[35m\]\$(parse_git_branch)\[\e[m\]] "
 else
-    export PS1="[\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "
+    export PS1="[\[\e[33m\]\$(get_distro_icon)\[\e[m\] \[\e[36m\]\w\[\e[m\]\[\e[35m\]\$(parse_git_branch)\[\e[m\]] "
 fi
-
-eval "$(fzf --bash)"
-
 
 export PS2="> "
 export PATH=~/bin:$PATH 
@@ -131,42 +151,67 @@ fi
     alias ping='ping -c 10'
     alias less='less -R'
     alias p="ps aux | grep "
-
-alias cpuquiet="sudo cpupower frequency-set -g powersave"
-alias cpuboost="sudo cpupower frequency-set -g performance"
-
-# some more ls aliases
-    #alias ll='ls -lh'
-    #alias lla='ls -lah'
-    #alias la='ls -A'
-    #alias l='ls -CF'
-
-# some more ls aliases
-    alias l='eza -g --group-directories-first'
-    alias la='eza -G -a --icons --group-directories-first'
-    alias ls='eza -g --icons --group-directories-first'
-    alias ll='eza -l -g --icons --group-directories-first'
-    alias lla='eza -l -a -g --icons --group-directories-first'
-    alias tree='eza --tree --icons'  
-    alias snapgui='snapper-gui'
+    alias cpuquiet="sudo cpupower frequency-set -g powersave"
+    alias cpuboost="sudo cpupower frequency-set -g performance"
     alias chmod='chmod --preserve-root'
     alias chown='chown --preserve-root'
     alias chgrp='chgrp --preserve-root'
     
-# Alias definitions.
+    # some more ls aliases
+    # eza aliases
+    if command -v eza >/dev/null 2>&1; then
+      alias l='eza -g --group-directories-first'
+      alias la='eza -G -a --icons --group-directories-first'
+      alias ls='eza -g --icons --group-directories-first'
+      alias ll='eza -l -g --icons --group-directories-first'
+      alias lla='eza -l -a -g --icons --group-directories-first'
+      alias tree='eza --tree --icons'
+    else
+      alias l='ls -CF'
+      alias la='ls -A'
+      alias ls='ls --color=auto --group-directories-first'
+      alias ll='ls -lh'
+      alias lla='ls -lah'
+    fi
 
 
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/ezamples in the bash-doc package.
+# NixOS aliases
+if command -v nixos-rebuild >/dev/null 2>&1; then
+  alias config='sudo nvim /etc/nixos/configuration.nix'
+  alias home='sudo nvim /etc/nixos/'
+  alias gen='sudo nix-env --list-generations --profile /nix/var/nix/profiles/system'
+
+  rebuild() {
+    sudo nixos-rebuild switch --flake /etc/nixos#nixos-btw
+  }
+
+   update() {
+  cd /etc/nixos || return
+
+  echo "Updating flake..."
+  sudo nix flake update
+
+  echo "Rebuilding system..."
+  sudo nixos-rebuild switch --flake /etc/nixos#nixos-btw
+
+  echo "Keeping last 6 system generations..."
+  sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations +6
+
+  echo "Running garbage collection..."
+  sudo nix-store --gc
+} 
+
+    garbage() {
+        sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +3
+        sudo nix-collect-garbage
+      }
+fi
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
+
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
@@ -177,17 +222,36 @@ fi
 
 
 # fzf
-export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden'
-export FZF_DEFAULT_OPTS='--no-height --color=bg+:#343d46,gutter:-1,pointer:#ff3c3c,info:#0dbc79,hl:#0dbc79,hl+:#23d18b'
+if command -v fzf >/dev/null 2>&1; then
+  if command -v fd >/dev/null 2>&1; then
+    export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND='fd --type d . --color=never --hidden'
+  fi
+  export FZF_DEFAULT_OPTS='--no-height --color=bg+:#343d46,gutter:-1,pointer:#ff3c3c,info:#0dbc79,hl:#0dbc79,hl+:#23d18b'
+  if command -v bat >/dev/null 2>&1; then
+    export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :50 {}'"
+  fi
+  if command -v tree >/dev/null 2>&1; then
+    export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
+  fi
+fcd() {
+  local dir
+  dir="$(find . -type d | fzf)" || return
+  [ -n "$dir" ] && cd "$dir"
+ }
 
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :50 {}'"
+open() {
+  local file
+  file="$(find . -type f | fzf)" || return
+  [ -n "$file" ] && xdg-open "$file"
+}
 
-export FZF_ALT_C_COMMAND='fd --type d . --color=never --hidden'
-export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"
+eval "$(fzf --bash)"
 
+fi
 
-
+# functions
 docview () {
     if [[ -f $1 ]] ; then
         case $1 in
@@ -203,13 +267,6 @@ docview () {
         printf "'%s' is not a valid file!\n" "$1" >&2
         return 1;
     fi
-}
-
-fcd () {
-  cd "$(find -type d | fzf)"
-}
-open () {
-  xdg-open "$(find -type f |fzf)"
 }
 
 note () {
@@ -393,5 +450,7 @@ export PS1="[\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "	statu
 		echo ""
 	fi
 }
-
-eval "$(zoxide init --cmd cd bash)"
+# zoxide
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init --cmd cd bash)"
+fi
