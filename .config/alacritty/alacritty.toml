@@ -2,19 +2,19 @@
 size = 13
 
 [font.bold]
-family = "SauceCodePro Nerd Font"
+family = "CodeNewRoman Nerd Font"
 style = "Bold"
 
 [font.bold_italic]
-family = "SauceCodePro Nerd Font"
+family = "CodeNewRoman Nerd Font"
 style = "Bold Italic"
 
 [font.italic]
-family = "SauceCodePro Nerd Font"
+family = "CodeNewRoman Nerd Font"
 style = "Italic"
 
 [font.normal]
-family = "SauceCodePro Nerd Font"
+family = "CodeNewRoman Nerd Font"
 style = "Regular"
 
 
@@ -30,7 +30,7 @@ multiplier = 3
 [window]
 dynamic_title = true
 #gtk_theme_variant = "None"
-opacity = 0.75
+opacity = 0.85
 title = "Terminal"
 #dimensions=
 
@@ -44,8 +44,8 @@ columns = 75
 lines = 25
 
 [colors.primary]
-background = '#24283b'
-foreground = '#a9b1d6'
+background = '#1a1b1b'
+foreground = '#d8dee9'
 dim_foreground = "#828482"  
 bright_foreground = "None"  
 

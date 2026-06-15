@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+cmd="guix"
+
+for arg in "$@"; do
+  printf -v quoted "%q" "$arg"
+  cmd="$cmd $quoted"
+done
+
+script -qefc "$cmd" /dev/null | perl -CSD -pe 's/\x{2595}([\x{2588}\x{258F}\x{258E}\x{258D}\x{258C}\x{258B}\x{258A}\x{2589} ]*)\x{258F}/my $b=$1; $b=~s|[\x{2588}\x{258F}\x{258E}\x{258D}\x{258C}\x{258B}\x{258A}\x{2589}]|#|g; "[$b]"/ge'
