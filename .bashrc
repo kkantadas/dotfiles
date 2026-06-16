@@ -154,8 +154,7 @@ fi
     alias chown='chown --preserve-root'
     alias chgrp='chgrp --preserve-root'
     
-    alias guix='guix-ascii '
-
+    #alias guix='guix-ascii '
     # some more ls aliases
     # eza aliases
     if command -v eza >/dev/null 2>&1; then
