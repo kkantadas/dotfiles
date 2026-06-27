@@ -43,6 +43,8 @@ set.backup = false
 set.writebackup = false
 set.swapfile = false
 set.hidden = true
+vim.opt.undodir = vim.fn.stdpath("data") .. "/undodir"
+vim.opt.undofile = true
 
 -- Clipboard
 set.clipboard = "unnamedplus"
@@ -66,3 +68,10 @@ vim.g.netrw_winsize = 25
 -- Less noisy startup/messages
 vim.o.shortmess = vim.o.shortmess .. "c"
 vim.o.shm = vim.o.shm .. "I"
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+    desc = "Highlight when yanking (copying) text",
+    callback = function()
+        vim.hl.on_yank()
+    end,
+})
