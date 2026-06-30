@@ -51,7 +51,7 @@ set.clipboard = "unnamedplus"
 set.mouse = "a"
 
 -- UI
-set.cmdheight = 2
+set.cmdheight = 1
 set.pumheight = 10
 set.showmode = false
 set.timeoutlen = 1000
